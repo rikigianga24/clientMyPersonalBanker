@@ -1,24 +1,83 @@
 import React from "react"
+import {Container , Button  } from "react-bootstrap"
+import {Grid, Box , Link , TextField,Typography, CssBaseline ,makeStyles } from "@material-ui/core"
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
 function FormAuthenticator(){
+    const useStyles = makeStyles((theme) => ({
+        paper: {
+          marginTop: theme.spacing(8),
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
+        avatar: {
+          margin: theme.spacing(1),
+          backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+          width: '100%',
+          marginTop: theme.spacing(1),
+        },
+        submit: {
+          margin: theme.spacing(3, 0, 2),
+        },
+      }));
+      const classes = useStyles();
     return(
-        <>
-        <form class="form-signin">
-      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus/>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required/>
-      <div class="checkbox mb-3">
+        <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} noValidate method="POST">
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="cf"
+            label="Codice Fiscale"
+            name="cf"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-    </form>
-        </>
+      <Box mt={8}>
+      </Box>
+    </Container>
     )
 }
 export default FormAuthenticator
