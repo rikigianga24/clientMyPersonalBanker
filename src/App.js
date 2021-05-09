@@ -51,12 +51,12 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            bezKoder
+            My Personal Banker
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/home"} className="nav-link">
-                Home
+                <img src="../icons/homepage.png" alt="" style={{width : "30px"}} />Home
               </Link>
             </li>
 {/*
@@ -80,7 +80,7 @@ class App extends Component {
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
-                  User
+                  <img src="../icons/id-card.png" alt="" style={{width : "30px"}} />User
                 </Link>
               </li>
             )}
@@ -93,23 +93,37 @@ class App extends Component {
                   {currentUser.username}
                 </Link>
               </li>
-              <li className="nav-item">
+             
+            <li className="nav-item">
+            <Link to={"/prepaidcard"} className="nav-link">
+              <img src="../icons/prepaid-card.png" alt="" style={{width: "30px" }}></img>Carta Prepagata
+            </Link>
+            </li>
+
+            <li className="nav-item">
+            <Link to={"/creditcard"} className="nav-link">
+              <img src="../icons/credit-card.png" alt="" style={{width: "30px" }}></img>Carta di credito
+            </Link>
+            </li>
+
+            <li className="nav-item">
+            <Link to={"/transactions"} className="nav-link">
+              <img src="../icons/cash-payment.png" alt="" style={{width: "30px" }}></img>Transazioni
+            </Link>
+            </li>
+
+            <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                <img src="../icons/logout.png" alt="" style={{width: "30px" }}></img>LogOut
                 </a>
               </li>
-            </div>
+          </div>
+          
           ) : (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
+                <img src="../icons/lock.png" alt="" style={{width: "30px" }}></img>Login
                 </Link>
               </li>
             </div>
