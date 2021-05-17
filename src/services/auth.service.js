@@ -11,19 +11,18 @@ class AuthService {
       })
       .then(response => {
         if (response.data.token) {
-          localStorage.setItem("user", response.data.token);
+          sessionStorage.setItem("user", response.data.token);
         }
-
         return response.data;
       });
   }
 
   logout() {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
   }
 
   getCurrentUser() {
-    return localStorage.getItem('user')
+    return sessionStorage.getItem('user')
   }
 }
 

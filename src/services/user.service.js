@@ -9,13 +9,34 @@ class UserService {
     return axios.get(API_URL + '/api/users.json', { headers: authHeader() });
   }
 
-  getUserBoard() {
-    
-    return axios.get(API_URL + '/users', { headers: authHeader() });
+  getCurrentProfile(cf) {
+    return new Promise((resolve)=>{
+      axios(API_URL + '/api/users/'+cf+".json", { headers: authHeader() })
+      .then(resp => {
+        console.log(JSON.stringify(resp.data))
+        console.log(resp.data.cf)
+        resolve(resp.data)
+    })
+    .catch(err => {
+        // Handle Error Here
+        console.error(err);
+    });;
+    }) 
   }
 
-  getBankAccountInfos(){
-    return axios.get(API_URL + '/api/conto_correntes', { headers : authHeader() })
+  getBankAccountInfos(iban){
+    return new Promise((resolve)=>{
+      axios(API_URL + iban +".json", { headers: authHeader() })
+      .then(resp => {
+        console.log(JSON.stringify(resp.data))
+        console.log(resp.data.cf)
+        resolve(resp.data)
+    })
+    .catch(err => {
+        // Handle Error Here
+        console.error(err);
+    });;
+    })
   }
 
 }

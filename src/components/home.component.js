@@ -1,42 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
+import {Row} from "react-bootstrap"
+import "../style.css";
 
-import UserService from "../services/user.service";
-
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: ""
-    };
-  }
-
-  componentDidMount() {
-    UserService.getBankAccountInfos().then(
-      response => {
-        console.log(response.headers)
-        this.setState({
-          content: JSON.stringify(response.data)
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-        </header>
-      </div>
-    );
-  }
+class homecomponent extends React.Component{
+    render(){
+        return(
+            <>
+            <div class="cover-page-content">
+               <h1>La tua banca a casa tua</h1>
+               <a href="#">Unisciti a noi!</a>
+            </div>
+            </>
+        )
+    }
 }
+export default homecomponent

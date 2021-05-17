@@ -55,7 +55,7 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.cf, this.state.password).then(
         () => {
-         
+         sessionStorage.setItem("currentCF",this.state.cf)
          this.props.history.push("/profile");
          window.location.reload();
         
@@ -98,7 +98,7 @@ export default class Login extends Component {
             }}
           >
             <div className="form-group">
-              <label htmlFor="cf">cf</label>
+              <label htmlFor="cf">Codice Fiscale</label>
               <Input
                 type="text"
                 className="form-control"

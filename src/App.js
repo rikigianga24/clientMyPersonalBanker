@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
 import AuthService from "./services/auth.service";
-
 import Login from "./components/login.component";
-import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-
+import BankAccount from "./components/bankaccount.component";
+import homecomponent from "./components/home.component";
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +45,7 @@ class App extends Component {
     const { currentUser } = this.state;
 
     return (
-      <div>
+      <div className="h-100">
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
             My Personal Banker
@@ -79,8 +76,8 @@ class App extends Component {
 
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  <img src="../icons/id-card.png" alt="" style={{width : "30px"}} />User
+                <Link to={"/profile"} className="nav-link">
+                  <img src="../icons/id-card.png" alt="" style={{width : "30px"}} /> Profile
                 </Link>
               </li>
             )}
@@ -130,15 +127,13 @@ class App extends Component {
           )}
         </nav>
 
-        <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path={["/", "/home"]} component={homecomponent} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
-            <Route path="/user" component={BoardUser} />
+            <Route exact path="/bankaccount" component={BankAccount} />
           </Switch>
         </div>
-      </div>
     );
   }
 }
