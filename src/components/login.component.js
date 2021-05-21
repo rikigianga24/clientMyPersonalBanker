@@ -58,7 +58,6 @@ export default class Login extends Component {
          sessionStorage.setItem("currentCF",this.state.cf)
          this.props.history.push("/profile");
          window.location.reload();
-        
         },
         error => {
           const resMessage =

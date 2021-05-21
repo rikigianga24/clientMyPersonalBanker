@@ -5,7 +5,6 @@ const API_URL = 'http://localhost:8000';
 
 class UserService {
   getPublicContent() {
-    console.log(API_URL+'/api/users.json')
     return axios.get(API_URL + '/api/users.json', { headers: authHeader() });
   }
 
@@ -15,6 +14,35 @@ class UserService {
       .then(resp => {
         console.log(JSON.stringify(resp.data))
         console.log(resp.data.cf)
+        resolve(resp.data)
+    })
+    .catch(err => {
+        // Handle Error Here
+        console.error(err);
+    });;
+    }) 
+  }
+
+  getAllTransactionFromIBAN(iban){
+    return new Promise((resolve)=>{
+      axios(API_URL + "/api/transazioniperiban/" + iban, { headers: authHeader() })
+      .then(resp => {
+        console.log(JSON.stringify(resp.data))
+        resolve(resp.data)
+    })
+    .catch(err => {
+        // Handle Error Here
+        console.error(err);
+    });;
+    }) 
+  }
+
+  getTransactionFromID(url) {
+    return new Promise((resolve)=>{
+      axios(API_URL + url +".json", { headers: authHeader() })
+      .then(resp => {
+        console.log(JSON.stringify(resp.data))
+        console.log(API_URL + url)
         resolve(resp.data)
     })
     .catch(err => {
@@ -39,6 +67,50 @@ class UserService {
     })
   }
 
+  getIdTransaction(iban){
+    new Promise((resolve)=>{
+    return axios(API_URL+"/api/findLastTransactionForIban/"+iban)
+    .then(resp => {
+      this.sendMail(resp.data)
+      console.log("SUS")
+      console.log(API_URL+"/api/findLastTransactionForIban/"+iban)
+      console.log(JSON.stringify(resp.data))
+      console.log(resp.data.cf)
+      resolve(resp.data)
+  })
+  .catch(err => {
+      // Handle Error Here
+      console.error(err);
+  });
+  })
+  }
+
+  sendMail(id){
+    new Promise((resolve)=>{
+    axios.get(API_URL+"/api/email/"+id)
+    .then(resp => {
+      console.log(JSON.stringify(resp.data))
+      console.log(resp.data.cf)
+      resolve(resp.data)
+    })
+    .catch(err => {
+        // Handle Error Here
+        console.error(err);
+    });;
+    })
+  }
+
+  postPayment(iban_p,data_p,importo_p,tipo_p,iban_destinatario_p){
+    axios.post(API_URL+ "/api/transaziones",{
+        ibanMittente:"/api/conto_correntes/"+iban_p,
+        data:data_p,
+        importo:importo_p,
+        tipo:tipo_p,
+        ibanDestinatario:iban_destinatario_p,
+        movimento:"Uscita"
+    } ,{ headers: authHeader() })
+    this.getIdTransaction(sessionStorage.getItem("iban"))
+  }
 }
 
 export default new UserService();

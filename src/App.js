@@ -7,6 +7,8 @@ import Login from "./components/login.component";
 import Profile from "./components/profile.component";
 import BankAccount from "./components/bankaccount.component";
 import homecomponent from "./components/home.component";
+import Transaction  from "./components/transaction.component";
+import successScreen from "./functional/success_screen";
 
 class App extends Component {
   constructor(props) {
@@ -14,10 +16,6 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      /*
-      showModeratorBoard: false,
-      showAdminBoard: false,
-      */
       currentUser: undefined,
     };
   }
@@ -56,23 +54,6 @@ class App extends Component {
                 <img src="../icons/homepage.png" alt="" style={{width : "30px"}} />Home
               </Link>
             </li>
-{/*
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-*/}
 
             {currentUser && (
               <li className="nav-item">
@@ -131,7 +112,9 @@ class App extends Component {
             <Route exact path={["/", "/home"]} component={homecomponent} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/transactions" component={Transaction} />
             <Route exact path="/bankaccount" component={BankAccount} />
+            <Route exact path="/success" component={successScreen} />
           </Switch>
         </div>
     );

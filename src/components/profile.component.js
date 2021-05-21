@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 import userService from "../services/user.service";
 import {Spinner} from "react-bootstrap";
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,8 @@ export default class Profile extends Component {
       )
     }
     sessionStorage.setItem("currentIBAN",this.state.currentUser.iban)
-
+    var iban = this.state.currentUser.iban.split("/")
+    sessionStorage.setItem("iban",iban[3])
     return (
       <div className="container h-75">
           <div className="jumbotron mt-3">
@@ -39,17 +39,16 @@ export default class Profile extends Component {
           <strong>Codice Fiscale: </strong>
           {this.state.currentUser.cf}<br></br>
           <strong>IBAN: </strong>
-          {this.state.currentUser.iban}<br></br>
+          {iban[3]}<br></br>
           <strong>Cellulare: </strong>
           {this.state.currentUser.cellulare}<br></br>
           <strong>Indirizzo: </strong>
           {this.state.currentUser.via +" n"+ this.state.currentUser.civico +" ("+ this.state.currentUser.cap+")"}<br></br>
-        <p>
-        <div class="alert alert-warning" role="alert">
-         <a href="/bankaccount" class="alert-link"> Visita il tuo conto </a>
-      </div>
-         
-        </p>
+          <strong>E-mail: </strong>
+          {this.state.currentUser.email}<br></br>
+          </div>
+          <div class="alert alert-warning" role="alert">
+            <a href="/bankaccount" class="alert-link"> Visita il tuo conto </a>
           </div>
       </div>
     );
