@@ -71,12 +71,10 @@ class UserService {
     new Promise((resolve)=>{
     return axios(API_URL+"/api/findLastTransactionForIban/"+iban)
     .then(resp => {
-      this.sendMail(resp.data)
-      console.log("SUS")
       console.log(API_URL+"/api/findLastTransactionForIban/"+iban)
       console.log(JSON.stringify(resp.data))
-      console.log(resp.data.cf)
       resolve(resp.data)
+      this.sendMail(resp.data)
   })
   .catch(err => {
       // Handle Error Here
@@ -89,8 +87,6 @@ class UserService {
     new Promise((resolve)=>{
     axios.get(API_URL+"/api/email/"+id)
     .then(resp => {
-      console.log(JSON.stringify(resp.data))
-      console.log(resp.data.cf)
       resolve(resp.data)
     })
     .catch(err => {
@@ -100,17 +96,23 @@ class UserService {
     })
   }
 
-  postPayment(iban_p,data_p,importo_p,tipo_p,iban_destinatario_p){
-    axios.post(API_URL+ "/api/transaziones",{
-        ibanMittente:"/api/conto_correntes/"+iban_p,
-        data:data_p,
+  postPayment(iban_p,importo_p,tipo_p,iban_destinatario_p){
+    new Promise((resolve)=>{
+        axios.post(API_URL+ "/api/transaziones",{
+        ibanMittente: iban_p,
         importo:importo_p,
         tipo:tipo_p,
         ibanDestinatario:iban_destinatario_p,
         movimento:"Uscita"
     } ,{ headers: authHeader() })
-    this.getIdTransaction(sessionStorage.getItem("iban"))
+    .then(resp => {
+      resolve(resp.data)
+        sessionStorage.setItem("resp",resp.data)
+      return resp.data  
+    })
+  })
   }
 }
+
 
 export default new UserService();

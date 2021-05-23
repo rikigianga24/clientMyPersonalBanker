@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
 import userService from "../services/user.service";
 import {Spinner, Badge, Row, Col} from "react-bootstrap"
 import "../transaction.css"
@@ -23,25 +22,25 @@ export default class BankAccount extends Component {
   }
 
   render() {
-    if(this.state.currentBankInfos=="" && this.state.transazioni==""){
+    if(this.state.currentBankInfos==="" && this.state.transazioni===""){
       return(
         <div className="container h-75 d-flex justify-content-center align-items-center">
             <Spinner animation="border" variant="warning" />
         </div>
       )
     }
-
-    if(this.state.currentBankInfos.stato==true){
-      var stato=<Badge variant='success'>Attivo</Badge>
+    var stato="";
+    if(this.state.currentBankInfos.stato===true){
+      stato=<Badge variant='success'>Attivo</Badge>
     }
     else{
-      var stato=<Badge variant='danger'>Disattivo</Badge>
+      stato=<Badge variant='danger'>Disattivo</Badge>
     }
     return (
       <div className="container">
         <header className="jumbotron mt-3">
           <h2>Il tuo conto</h2>
-            <hr class="my-4"></hr>
+            <hr className="my-4"></hr>
           <h2>
             <strong>Saldo attuale: </strong>
             {this.state.currentBankInfos.saldo}€<br></br>
@@ -52,14 +51,14 @@ export default class BankAccount extends Component {
             {stato}
           <br></br>
         </header>
-        <div class="alert alert-warning" role="alert">
-            <a href="/profile" class="alert-link"> Torna al profilo </a>
+        <div className="alert alert-warning" role="alert">
+            <a href="/profile" className="alert-link"> Torna al profilo </a>
         </div>
         <div className="jumbotron">
           <h2>Transazioni</h2>
-            <hr class="my-4"></hr>
+            <hr className="my-4"></hr>
             {this.state.transazioni.map(transaction => {
-              if(transaction.movimento=="Entrata"){
+              if(transaction.movimento==="Entrata"){
                 return (
                   <>
                     <div className="card border-success">

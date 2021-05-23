@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
 import userService from "../services/user.service";
 import {Spinner} from "react-bootstrap";
 export default class Profile extends Component {
@@ -17,7 +16,7 @@ export default class Profile extends Component {
   }
 
   render() {
-    if(this.state.currentUser==""){
+    if(this.state.currentUser===""){
       return(
         <div className="container h-75 d-flex justify-content-center align-items-center">
             <Spinner animation="border" variant="warning" />
@@ -31,7 +30,7 @@ export default class Profile extends Component {
       <div className="container h-75">
           <div className="jumbotron mt-3">
           <h1>Il tuo profilo</h1>
-          <hr class="my-4"></hr>
+          <hr className="my-4"></hr>
           <strong>Nome: </strong>
           {this.state.currentUser.nome}<br></br>
           <strong>Cognome: </strong>
@@ -47,8 +46,8 @@ export default class Profile extends Component {
           <strong>E-mail: </strong>
           {this.state.currentUser.email}<br></br>
           </div>
-          <div class="alert alert-warning" role="alert">
-            <a href="/bankaccount" class="alert-link"> Visita il tuo conto </a>
+          <div className="alert alert-warning" role="alert">
+            <a href="/bankaccount" className="alert-link"> Visita il tuo conto </a>
           </div>
       </div>
     );

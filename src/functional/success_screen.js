@@ -1,6 +1,4 @@
 import React from "react"
-import { useHistory } from "react-router-dom";
-import { Redirect,Route } from "react-router-dom";
 import "./success.css"
 class successScreen extends React.Component{
     render(){
