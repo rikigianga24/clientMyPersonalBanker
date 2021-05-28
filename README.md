@@ -1,5 +1,5 @@
-# Visualizzazione temperatura
-App per visualizzare la temperatura utilizzando un Web Service.
+# My Personal Banker (HomeBanking)
+App per visualizzare il conto corrente e gestirlo da casa.
 
 ## Dipendenze
 - node
